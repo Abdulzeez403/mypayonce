@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { Loader2 } from "lucide-react";
 import classNames from "classnames";
@@ -10,7 +11,6 @@ interface IProps {
   type?: "submit" | "button";
   className?: string;
   disabled?: boolean;
-  color?: string;
   onClick?: () => void;
   children?: React.ReactNode;
 }
@@ -26,13 +26,13 @@ export const ApButton: React.FC<IProps> = ({
   children,
 }) => {
   const btnClassName = classNames(
-    "flex items-center justify-center gap-2 text-sm rounded-lg py-3 px-5 font-light transition-all",
+    "inline-flex items-center justify-center gap-2 text-sm font-medium px-4 py-2 rounded-md transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed",
     {
-      "bg-primary text-white hover:bg-primary/80": btnType === "primary",
-      "bg-white border border-primary text-primary hover:bg-primary/10":
+      // Default styles based on btnType
+      "bg-black text-white hover:bg-black/90 mt-2": btnType === "primary",
+      "border border-black text-black hover:bg-black hover:text-white":
         btnType === "outline",
-      "bg-red-500 text-white hover:bg-red-600": btnType === "danger",
-      "cursor-not-allowed bg-gray-400": disabled && btnType !== "outline",
+      "bg-red-600 text-white hover:bg-red-700": btnType === "danger",
     },
     className
   );
@@ -45,7 +45,7 @@ export const ApButton: React.FC<IProps> = ({
       disabled={disabled || loading}
     >
       {loading ? (
-        <Loader2 className="animate-spin text-2xl" />
+        <Loader2 className="animate-spin w-4 h-4" />
       ) : (
         title || children
       )}

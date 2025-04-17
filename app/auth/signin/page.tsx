@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { ApButton } from "@/components/button/button";
+import Link from "next/link";
 
 export default function SignIn() {
   const router = useRouter();
@@ -66,9 +67,9 @@ export default function SignIn() {
 
         <p className="text-center mt-4 text-sm">
           Don't have an account ?
-          <a href="/signup" className="text-blue-500 hover:underline">
+          <Link href="/auth/signup" className="text-blue-500 hover:underline">
             Sign In
-          </a>
+          </Link>
         </p>
       </div>
     </div>

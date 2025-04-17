@@ -1,8 +1,9 @@
 "use client";
+
 import { ErrorMessage, useField } from "formik";
 import React, { forwardRef, useRef, useState } from "react";
 import { ApText } from "../typograph/text";
-import { Eye, EyeOff } from "lucide-react"; // Icon for password visibility toggle
+import { Eye, EyeOff } from "lucide-react";
 
 interface IProps {
   label?: string;
@@ -27,11 +28,11 @@ export const ApTextInput = forwardRef<
       type = "text",
       name,
       onChange,
-      inputClassName,
-      placeHolder,
-      containerClassName,
-      disabled,
-      ignoreFormik,
+      inputClassName = "",
+      placeHolder = "",
+      containerClassName = "",
+      disabled = false,
+      ignoreFormik = false,
     },
     ref
   ) => {
@@ -43,71 +44,62 @@ export const ApTextInput = forwardRef<
       formikField = useField(name);
     }
 
-    // Expose a function to set cursor position externally
-    // useImperativeHandle(ref, () => ({
-    //   setCursorPosition: (start: number, end: number) => {
-    //     if (inputRef.current && "setSelectionRange" in inputRef.current) {
-    //       inputRef.current.setSelectionRange(start, end);
-    //     }
-    //   },
-    // }));
+    const handleChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      if (!ignoreFormik) formikField?.[2].setValue(e.target.value);
+      onChange?.(e.target.value);
+    };
 
     return (
-      <div className={containerClassName}>
+      <div className={`flex flex-col ${containerClassName}`}>
         {label && (
-          <ApText className="cus-sm2:text-xs mb-2" size="sm">
+          <ApText className="mb-1 text-sm font-medium text-gray-700">
             {label}
           </ApText>
         )}
 
         {type === "textarea" ? (
           <textarea
-            className={`border p-3 text-[13px] outline-none w-full rounded-sm focus:border-gray-400 resize-none ${inputClassName}`}
-            {...(!ignoreFormik ? formikField[0] : {})}
             ref={inputRef as React.RefObject<HTMLTextAreaElement>}
+            className={`w-full rounded-md border border-gray-300 p-3 text-sm focus:border-black focus:outline-none disabled:opacity-50 ${inputClassName}`}
+            placeholder={placeHolder}
+            disabled={disabled}
             name={name}
             rows={5}
-            placeholder={placeHolder}
-            onChange={(e) => {
-              if (!ignoreFormik) formikField?.[2].setValue(e.target.value);
-              onChange && onChange(e.target.value);
-            }}
-          ></textarea>
+            {...(!ignoreFormik ? formikField[0] : {})}
+            onChange={handleChange}
+          />
         ) : (
           <div className="relative">
             <input
-              type={type === "password" && !showPassword ? "password" : "text"}
-              {...(!ignoreFormik ? formikField[0] : {})}
               ref={inputRef as React.RefObject<HTMLInputElement>}
-              name={name}
-              disabled={disabled || false}
-              className={`border px-3 text-[13px] outline-none w-full h-[45px] rounded-sm focus:border-gray-400 ${inputClassName}`}
+              type={type === "password" && !showPassword ? "password" : "text"}
+              className={`w-full h-11 rounded-md border border-gray-300 px-3 text-sm focus:border-black focus:outline-none disabled:opacity-50 ${inputClassName}`}
               placeholder={placeHolder}
-              onChange={(e) => {
-                if (!ignoreFormik) formikField?.[2].setValue(e.target.value);
-                onChange && onChange(e.target.value);
-              }}
+              disabled={disabled}
+              name={name}
+              {...(!ignoreFormik ? formikField[0] : {})}
+              onChange={handleChange}
             />
 
-            {/* Show/Hide Password Icon */}
             {type === "password" && (
               <button
                 type="button"
-                className="absolute right-3 top-3 text-gray-500"
                 onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             )}
           </div>
         )}
 
-        {/* Display Formik Error Messages */}
         {!ignoreFormik && (
           <ErrorMessage
-            className="text-red-500 text-sm mt-1"
             name={name}
             component="div"
+            className="mt-1 text-xs text-red-500"
           />
         )}
       </div>
