@@ -24,12 +24,12 @@ export function Header() {
         <Link href="#" className="hover:text-gray-300">
           Contact Us
         </Link>
-        <Link href="#" className="hover:text-gray-300">
+        <Link href="/auth/signup" className="hover:text-gray-300">
           Create Account
         </Link>
       </nav>
       <Link
-        href="/"
+        href="/auth/signin"
         className="bg-purple-600 px-6 py-2 rounded-md text-white font-semibold hover:bg-purple-700"
       >
         Login

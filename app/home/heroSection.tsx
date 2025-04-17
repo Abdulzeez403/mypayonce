@@ -18,13 +18,13 @@ export function HeroSection() {
           </p>
           <div className="mt-6 space-x-4">
             <Link
-              href="/"
+              href="/auth/signin"
               className="bg-purple-600 px-6 py-3 rounded-md text-white font-semibold hover:bg-purple-700"
             >
               Login
             </Link>
             <Link
-              href="/"
+              href="/auth/signup"
               className="bg-purple-400 px-6 py-3 rounded-md text-white font-semibold hover:bg-purple-500"
             >
               Register
