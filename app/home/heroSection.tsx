@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image"
+import HeroImage from "@/public/images/heroImage.png"
 
 export function HeroSection() {
   return (
@@ -10,7 +12,7 @@ export function HeroSection() {
         <div className="max-w-lg">
           <h2 className="text-purple-400 font-semibold">VTU Services</h2>
           <h1 className="text-4xl md:text-5xl font-bold mt-2">
-            Instant Recharge On OneCrediit
+            Instant Recharge On Payonce!
           </h1>
           <p className="text-gray-300 mt-4">
             Buy Cheap Mobile Data, Airtime, Pay Electricity Bill, Pay TV
@@ -32,13 +34,13 @@ export function HeroSection() {
           </div>
         </div>
         <div className="mt-10 md:mt-0">
-          {/* <Image
-            src="/hero-mockup.png"
+          <Image
+            src={HeroImage}
             alt="App Screenshots"
-            width={600}
+            width={400}
             height={400}
             className="rounded-lg"
-          /> */}
+          />
         </div>
       </div>
     </div>

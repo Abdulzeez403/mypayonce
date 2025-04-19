@@ -5,10 +5,13 @@ export function TestimonialsSection() {
   return (
     <div className="py-20 px-6 md:px-20 bg-white">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out">
+        {/* Header */}
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
           What Our Customers Say
         </h2>
-        <p className="text-lg text-gray-600 mb-12 opacity-0 transition-all duration-500 ease-in-out delay-200">
+
+        {/* Subheader */}
+        <p className="text-lg text-gray-600 mb-12">
           Don’t take our word for it – here’s what our users have to say.
         </p>
 
@@ -30,7 +33,7 @@ export function TestimonialsSection() {
           ].map((t, idx) => (
             <div
               key={idx}
-              className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition opacity-0 transform translate-y-10 duration-500 ease-in-out"
+              className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition"
             >
               <p className="text-gray-700 italic mb-4">“{t.comment}”</p>
               <h4 className="text-indigo-600 font-semibold">{t.name}</h4>

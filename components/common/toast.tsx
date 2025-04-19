@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -8,11 +9,12 @@ export const ToastProvider = () => {
       position="top-right"
       autoClose={3000}
       hideProgressBar={false}
-      newestOnTop
+      newestOnTop={true}
       closeOnClick
-      pauseOnHover
+      rtl={false}
+      pauseOnFocusLoss
       draggable
-      theme="light"
+      pauseOnHover
     />
   );
 };
