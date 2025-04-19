@@ -8,6 +8,9 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { signUpUser } from "@/redux/features/user/userThunk";
 import { ApButton } from "@/components/button/button";
 import { useRouter } from "next/navigation";
+import logo from "@/public/images/logo.png";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function SignUp() {
   const dispatch = useDispatch<AppDispatch>();
@@ -42,7 +45,16 @@ export default function SignUp() {
   return (
     <div className="flex justify-center items-center min-h-screen ">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
+        <div className="flex justify-center mb-4">
+          <Image src={logo} alt="PayOnce logo" width={50} height={40} />
+        </div>
+        <h2 className="text-2xl font-semibold text-center mb-2">
+          Create Account
+        </h2>
+        <p className="text-center text-sm text-gray-600 mb-6">
+          Join PayOnce today and start enjoying instant VTU recharges and
+          seamless bill payments.
+        </p>
 
         <Formik
           initialValues={{
@@ -113,6 +125,16 @@ export default function SignUp() {
           <a href="/auth/signin" className="text-blue-500 hover:underline">
             Sign In
           </a>
+        </p>
+
+        <p className="text-center mt-6 text-sm text-gray-600">
+          Want to explore more?{" "}
+          <Link
+            href="/"
+            className="inline-block font-medium text-blue-600 hover:text-blue-800 transition-colors duration-200 underline-offset-4 hover:underline"
+          >
+            Go back home
+          </Link>
         </p>
       </div>
     </div>

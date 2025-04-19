@@ -9,18 +9,20 @@ export function Header() {
     // <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
     <header className="flex justify-between items-center px-6 md:px-20 py-4">
       <div className="flex items-center space-x-2">
+        <Link href="/">
         <Image src={logo} alt="Payonce" width={40} height={30} />
+
+        </Link>
       </div>
       <nav className="hidden md:flex space-x-6">
-        <Link href="/about" className="hover:text-gray-300 text-white">
+        <Link href="/" className="hover:text-gray-300 text-white">
           Home
         </Link>
+
         <Link href="/about" className="hover:text-gray-300">
           About
         </Link>
-        <Link href="/services" className="hover:text-gray-300">
-          Services
-        </Link>
+      
         <Link href="/contact" className="hover:text-gray-300">
           Contact Us
         </Link>
