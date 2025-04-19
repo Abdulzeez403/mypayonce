@@ -1,20 +1,15 @@
 "use client";
 
 import { Provider } from "react-redux";
-import dynamic from "next/dynamic";
 import { store } from "@/redux/store";
-
-// Dynamically import ToastContainer (no SSR)
-const ToastContainer = dynamic(
-  () => import("react-toastify").then((mod) => mod.ToastContainer),
-  { ssr: false }
-);
+import { ToastProvider } from "@/components/common/toast";
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
+      <ToastProvider />
+
       {children}
-      <ToastContainer />
     </Provider>
   );
 }

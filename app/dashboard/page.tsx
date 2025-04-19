@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
+import { HomeDashboard } from "./home";
 
-export default function DashboardHome() {
-  return <div className="text-center">page</div>;
+export default function Page() {
+  return <HomeDashboard />;
 }
