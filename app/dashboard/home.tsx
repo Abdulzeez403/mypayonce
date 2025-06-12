@@ -23,11 +23,12 @@ import TopSheetModal from "@/components/modal/topsheetModal";
 import { useEffect, useState } from "react";
 import { fetchUserTransactions } from "@/redux/features/transaction/transactionSlice";
 import { NotificationModal } from "@/components/modal/notificationModal";
-import { currentUser } from "@/redux/features/user/userThunk";
+import { addPin, currentUser } from "@/redux/features/user/userThunk";
 import { getLatestNotification } from "@/redux/features/notifications/notificationSlice";
 import { ApTextInput } from "@/components/input/textInput";
 import { Formik, Form } from "formik";
 import { ApButton } from "@/components/button/button";
+import { toast } from "react-toastify";
 
 export const HomeDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +60,21 @@ export const HomeDashboard = () => {
 
   const toggleBalance = () => setShowBalance((prev) => !prev);
 
-  const handleAddpin = () => {};
+  const handleAddpin = async (values: any) => {
+    try {
+      const resultAction = await dispatch(addPin({ pin: values.pin }));
+      if (addPin.fulfilled.match(resultAction)) {
+        toast.success("PIN updated successfully");
+        setPinModalOpen(false);
+        //  resetForm();
+      } else {
+        toast.error(resultAction.payload as string);
+      }
+    } catch (err) {
+      console.error("Error updating PIN:", err);
+      toast.error("Unexpected error. Please try again.");
+    }
+  };
 
   const getStatusIcon = (status: string) => {
     switch (status?.toLowerCase()) {
@@ -252,20 +267,26 @@ export const HomeDashboard = () => {
             >
               {({ isSubmitting }) => (
                 <Form>
-                  <div className="mt-6 bg-white p-6">
+                  <div className="mt-6 bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+                    <h4 className="text-center font-bold text-lg">
+                      Add a Transaction Pin
+                    </h4>
                     <p className="text-sm text-gray-500 mb-4 text-center">
                       Please enter your transaction pin. The new PIN must be
                       exactly 4 digits.
                     </p>
+
                     <ApTextInput
-                      label="Add Pin"
-                      name="oldpin"
+                      label="New Pin"
+                      name="pin" // 👈 This should match the backend (req.body.pin)
                       type="password"
-                      placeHolder="Enter old PIN"
+                      maxlength={4}
+                      placeHolder="Enter new PIN"
                     />
+
                     <ApButton
                       type="submit"
-                      title={isSubmitting ? "Add..." : "Add PIN"}
+                      title={isSubmitting ? "Adding..." : "Add PIN"}
                       disabled={isSubmitting}
                       className="w-full"
                     />

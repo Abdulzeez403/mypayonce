@@ -16,6 +16,7 @@ interface IProps {
   ignoreFormik?: boolean;
   containerClassName?: string;
   onChange?: (val: string) => void;
+  maxlength?: number;
 }
 
 export const ApTextInput = forwardRef<
@@ -34,6 +35,7 @@ export const ApTextInput = forwardRef<
       containerClassName = "",
       disabled = false,
       ignoreFormik = false,
+      maxlength,
     },
     ref
   ) => {
@@ -81,6 +83,7 @@ export const ApTextInput = forwardRef<
               name={name}
               {...(!ignoreFormik ? formikField[0] : {})}
               onChange={handleChange}
+              maxLength={maxlength}
             />
 
             {type === "password" && (
